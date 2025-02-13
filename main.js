@@ -1,19 +1,22 @@
-const { app, BrowserWindow, screen} = require('electron');
+const { app, BrowserWindow, screen, ipcMain} = require('electron');
 const path = require('path');
+
+let mainWindow;
 
 function createWindow() {
   const size = screen.getPrimaryDisplay().workAreaSize;
   const args = process.argv.slice(1);
   const serve = args.some((val) => val === '--serve');
   console.log(__dirname, "dirname");
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: size.width,
     height: size.height,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
       allowRunningInsecureContent: serve,
-      contextIsolation: false,
+      contextIsolation: true,
     },
   });
   if (serve) {
@@ -43,4 +46,9 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+ipcMain.on('salutaNode', (event, arg) => {
+  console.log(arg, `Saluto ricevuto da Angular`);
+  mainWindow.webContents.send('salutaAngular', 'Ciao Angular, sono Node');
 });
