@@ -11,7 +11,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron .",
-    "electron:serve-with-inspect": "wait-on tcp:4200 && electron . --serve --inspect-brk=9229"
+    "electron:serve-with-inspect": "wait-on tcp:4200 && electron . --serve --inspect-brk=9229",
+    "build:css": "tailwindcss build src/styles.css -o dist/output.css",
+    "watch:css": "tailwindcss build src/styles.css -o dist/output.css --watch"
   },
   "private": true,
   "dependencies": {
@@ -23,9 +25,12 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4.0.6",
     "@tailwindcss/typography": "^0.5.16",
     "daisyui": "^4.12.23",
     "rxjs": "~7.8.0",
+    "sqlite3": "^5.1.7",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
