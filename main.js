@@ -32,9 +32,9 @@ function createWindow() {
       label: 'Funzionalità',
       submenu: [
         { label: 'Home', click: () => mainWindow.webContents.send('navigate', 'home') },
+        { label: 'About us', click: () => mainWindow.webContents.send('navigate', 'about') },
         { label: 'Expenses', click: () => mainWindow.webContents.send('navigate', 'expenses') },
         { label: 'Contacts', click: () => mainWindow.webContents.send('navigate', 'contacts') },
-        { label: 'About', click: () => mainWindow.webContents.send('navigate', 'about') },
         { label: 'DevTools', click: () => mainWindow.webContents.openDevTools() },
         { label: 'Exit', click: () => app.quit() }
       ]

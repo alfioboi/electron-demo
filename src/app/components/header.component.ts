@@ -15,9 +15,9 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
         <nav>
           <ul class="flex space-x-4">
             <li> <a [routerLink]="'home'" routerLinkActive="text-yellow-300" class="hover:underline">Home</a></li>
+            <li><a [routerLink]="'about'" routerLinkActive="text-yellow-300"  class="hover:underline">About us</a></li>
             <li><a  [routerLink]="'expenses'" routerLinkActive="text-yellow-300" class="hover:underline">Expenses</a></li>
-            <li><a [routerLink]="'about'" routerLinkActive="text-yellow-300"  class="hover:underline">About</a></li>
-            <li><a [routerLink]="'Contact'" routerLinkActive="text-yellow-300"  class="hover:underline">Contact</a></li>
+            <li><a [routerLink]="'contacts'" routerLinkActive="text-yellow-300"  class="hover:underline">Contacts</a></li>
           </ul>
         </nav>
       </div>

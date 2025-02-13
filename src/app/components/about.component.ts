@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
+import {PageTitleComponent} from "./page-title.component";
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [],
+  imports: [
+    PageTitleComponent
+  ],
   template: `
+    <app-page-title [title]="title" />
     <p>
       about works!
     </p>
@@ -12,5 +16,5 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class AboutComponent {
-
+  title = signal('About us');
 }

@@ -12,8 +12,6 @@ import {FooterComponent} from "./components/footer.component";
     <div class="flex flex-col min-h-screen">
       <app-header class="sticky top-0 z-50"/>
       <main class="flex-grow container mx-auto p-4">
-        <h2 class="text-xl font-semibold mb-4">Welcome to My Website</h2>
-        <p>This is a responsive layout example using Tailwind CSS and DaisyUI.</p>
         <router-outlet/>
       </main>
       <app-footer class="mt-auto"/>
