@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 import {ElectronService} from "./services/electron.service";
 import {HeaderComponent} from "./components/header.component";
 import {FooterComponent} from "./components/footer.component";
@@ -23,10 +23,13 @@ import {FooterComponent} from "./components/footer.component";
 })
 export class AppComponent {
   title = 'talk-electron-demo';
-  constructor(private electronService: ElectronService) {
+  constructor(private electronService: ElectronService, private router: Router) {
     this.electronService.on('salutaAngular', (message) => {
       console.log('message received: ', message);
     });
+    this.electronService.on('navigate', (route: string) => {
+      this.router.navigate([route]).then();
+    })
     this.electronService.send('salutaNode', 'Hello from Angular');
   }
 }

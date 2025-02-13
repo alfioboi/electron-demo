@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, ipcMain} = require('electron');
+const { app, BrowserWindow, screen, ipcMain, globalShortcut, Menu} = require('electron');
 const path = require('path');
 const { Worker } = require('worker_threads');
 
@@ -22,17 +22,34 @@ function createWindow() {
   });
   if (serve) {
     const url = 'http://localhost:4200';
-    console.log(url);
     mainWindow.loadURL(url).then();
   } else {
     const url = path.join(__dirname, 'dist/talk-electron-demo/browser/index.html');
-    console.log(url);
-    mainWindow.loadFile(url).then(() => {
-      if (serve) {
-        mainWindow.webContents.openDevTools();
-      }
-    });
+    mainWindow.loadFile(url).then();
   }
+  const menuTemplate = [
+    {
+      label: 'Funzionalità',
+      submenu: [
+        { label: 'Home', click: () => mainWindow.webContents.send('navigate', 'home') },
+        { label: 'Expenses', click: () => mainWindow.webContents.send('navigate', 'expenses') },
+        { label: 'Contacts', click: () => mainWindow.webContents.send('navigate', 'contacts') },
+        { label: 'About', click: () => mainWindow.webContents.send('navigate', 'about') },
+        { label: 'DevTools', click: () => mainWindow.webContents.openDevTools() },
+        { label: 'Exit', click: () => app.quit() }
+      ]
+    }
+  ];
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  mainWindow.setMenu(menu);
+  globalShortcut.register('CommandOrControl+R', () => {});
+  globalShortcut.register('F5', () => {});
+  globalShortcut.register('Control+Shift+R', () => {});
+  globalShortcut.register('CommandOrControl+Shift+R', () => {});
+  // Aggiungi una scorciatoia per aprire DevTools
+  globalShortcut.register('CommandOrControl+Shift+I', () => {
+    mainWindow.webContents.openDevTools();
+  });
 }
 
 app.on('ready', createWindow);
