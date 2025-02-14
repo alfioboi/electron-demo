@@ -77,6 +77,20 @@ ipcMain.on('insert-expense', (event, expense) => {
   });
   worker.postMessage({ type: 'insert', data: expense });
 });
+ipcMain.on('update-expense', (event, expense) => {
+  const worker = new Worker(path.join(__dirname, 'db-worker.js'));
+  worker.on('message', (result) => {
+    event.reply('expense-updated', result);
+  });
+  worker.postMessage({ type: 'update', data: expense });
+});
+ipcMain.on('delete-expense', (event, id) => {
+  const worker = new Worker(path.join(__dirname, 'db-worker.js'));
+  worker.on('message', (result) => {
+    event.reply('expense-deleted', result);
+  });
+  worker.postMessage({ type: 'delete', data: id });
+});
 
 ipcMain.on('query-expenses', (event) => {
   const worker = new Worker(path.join(__dirname, 'db-worker.js'));

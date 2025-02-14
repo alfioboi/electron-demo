@@ -28,5 +28,22 @@ parentPort.on('message', (task) => {
         parentPort.postMessage({ success: true, data: rows });
       }
     });
+  } else if (task.type === 'update') {
+    const { id, description, amount, date } = task.data;
+    db.run(`UPDATE expenses SET description = ?, amount = ?, date = ? WHERE id = ?`, [description, amount, date, id], function(err) {
+      if (err) {
+        parentPort.postMessage({ success: false, error: err.message });
+      } else {
+        parentPort.postMessage({ success: true, changes: this.changes });
+      }
+    });
+  } else if (task.type === 'delete') {
+    db.run(`DELETE FROM expenses WHERE id = ?`, [task.data], function(err) {
+      if (err) {
+        parentPort.postMessage({ success: false, error: err.message });
+      } else {
+        parentPort.postMessage({ success: true, changes: this.changes });
+      }
+    });
   }
 });
