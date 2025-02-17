@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import {PageTitleComponent} from "./page-title.component";
 
 @Component({
@@ -13,7 +13,8 @@ import {PageTitleComponent} from "./page-title.component";
       contact works!
     </p>
   `,
-  styles: ``
+  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent {
   title = signal('Contacts');

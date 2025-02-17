@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
@@ -23,7 +23,8 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
       </div>
     </header>
   `,
-  styles: ``
+  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
 

@@ -11,7 +11,7 @@ import {FooterComponent} from "./components/footer.component";
   template: `
     <div class="flex flex-col min-h-screen">
       <app-header class="sticky top-0 z-50"/>
-      <main class="flex-grow container mx-auto p-4">
+      <main class="flex-grow w-full p-4">
         <router-outlet/>
       </main>
       <app-footer class="mt-auto"/>

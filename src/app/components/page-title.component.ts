@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-page-title',
@@ -9,7 +9,8 @@ import {Component, Input} from '@angular/core';
       {{ title() }}
     </h1>
   `,
-  styles: ``
+  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageTitleComponent {
   @Input() title!: () => string;
