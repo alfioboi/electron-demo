@@ -34,7 +34,8 @@ import {ForwardIconComponent} from "./forward-icon.component";
           </div>
 
           <!-- NOME -->
-          <div class="grid-cols-1 row-start-2 font-semibold text-xl flex items-center justify-center text-center nome-slot">
+          <div
+            class="grid-cols-1 row-start-2 font-semibold text-xl flex items-center justify-center text-center nome-slot">
             <!-- nome slot -->
             <div class="w-full">
               <ng-content select="[slot=nome]"/>
@@ -42,22 +43,23 @@ import {ForwardIconComponent} from "./forward-icon.component";
           </div>
 
           <!-- QUALIFICA -->
-          <div class="grid-cols-1 row-start-3 text-gray-500 italic flex items-center justify-center text-center qualifica-slot">
+          <div
+            class="grid-cols-1 row-start-3 text-gray-500 italic flex items-center justify-center text-center qualifica-slot">
             <!-- qualifica slot -->
             <ng-content select="[slot=qualifica]"/>
           </div>
         </div>
-      </div>
-      <div class="footer-content">
-        <div>
-          @if (hasBackward) {
-            <app-backward-icon (backWardClick)="handleBackWardClic()"/>
-          }
-        </div>
-        <div>
-          @if (hasForward) {
-            <app-forward-icon (forwardClick)="handleForWardClic()"/>
-          }
+        <div class="footer-content">
+          <div>
+            @if (hasBackward) {
+              <app-backward-icon (backWardClick)="handleBackWardClic()"/>
+            }
+          </div>
+          <div>
+            @if (hasForward) {
+              <app-forward-icon (forwardClick)="handleForWardClic()"/>
+            }
+          </div>
         </div>
       </div>
     </div>
