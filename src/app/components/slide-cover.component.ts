@@ -84,7 +84,7 @@ import {ForwardIconComponent} from "./forward-icon.component";
         }
 
         .header-slot {
-          flex: 0 0 30%; /* Usa flex per una proporzione fluida */
+          flex: 0 0 20%; /* Usa flex per una proporzione fluida */
           font-size: 6rem;
           font-weight: bold;
           display: flex;
@@ -93,7 +93,7 @@ import {ForwardIconComponent} from "./forward-icon.component";
         }
 
         .content-slot {
-          flex: 0 0 30%; /* Proporzione fluida al posto di height */
+          flex: 0 0 40%; /* Proporzione fluida al posto di height */
           font-size: 3rem;
           display: flex;
           flex-direction: column;

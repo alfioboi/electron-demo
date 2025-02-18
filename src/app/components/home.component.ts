@@ -65,6 +65,12 @@ import {SlideCoverComponent} from "./slide-cover.component";
                 </p>
               </li>
               <li class="flex items-center gap-2 bg-white/80 shadow-md p-4 rounded-lg">
+                <span class="h-3 w-3 inline-block bg-teal-500 rounded-full"></span>
+                <p class="text-gray-700 text-base font-medium">
+                  Come effettuare la build di produzione e distribuire l'applicazione'.
+                </p>
+              </li>
+              <li class="flex items-center gap-2 bg-white/80 shadow-md p-4 rounded-lg">
                 <span class="h-3 w-3 inline-block bg-indigo-500 rounded-full"></span>
                 <p class="text-gray-700 text-base font-medium">
                   Domande e risposte.
