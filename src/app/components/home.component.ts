@@ -1,26 +1,36 @@
 import {Component, signal} from '@angular/core';
 import {ChangeDetectionStrategy} from "@angular/core";
-import {PageTitleComponent} from "./page-title.component";
-import {SlideComponent} from "./slide.component";
+import {SlideCoverComponent} from "./slide-cover.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    PageTitleComponent,
-    SlideComponent
+    SlideCoverComponent
   ],
   template: `
-    <app-page-title [title]="title"></app-page-title>
-    <app-slide>
-      <div slot="header">Fino a qui ci passa</div>
-      <div slot="content">Fino a qui ci passa</div>
-      <div slot="footer">Fino a qui ci passa</div>
-    </app-slide>
+    @switch (page()) {
+      @case (1) {
+        <app-slide>
+          <div slot="header">Electron</div>
+          <div slot="content">Usare Javascript per creare applicazioni Desktop</div>
+          <div slot="footer">Marzo 2025</div>
+        </app-slide>
+      }
+      @case (2) {
+        <app-slide>
+          <div slot="header">Indice</div>
+          <div slot="content">Qui va l'indice del talk</div>
+          <div slot="footer"></div>
+        </app-slide>
+      }
+    }
   `,
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
-  readonly title = signal('HomePage')
+  readonly title = signal('HomePage');
+  maxPage = 2;
+  page = signal<number>(1);
 }

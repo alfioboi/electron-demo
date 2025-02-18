@@ -17,7 +17,20 @@ import {FooterComponent} from "./components/footer.component";
       <app-footer class="mt-auto"/>
     </div>
   `,
-  styles: ``
+  styles: `
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    app-slide {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  `
 })
 export class AppComponent {
   title = 'talk-electron-demo';
