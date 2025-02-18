@@ -1,21 +1,21 @@
-import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
-import {PageTitleComponent} from "./page-title.component";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {SlideFreeComponent} from "./slide-free.component";
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [
-    PageTitleComponent
+    SlideFreeComponent
   ],
   template: `
-    <app-page-title [title]="title"></app-page-title>
-    <p>
-      contact works!
-    </p>
+    <app-slide-free [hasBackward]="false" [hasForward]="false">
+      <div class="flex items-center justify-center h-full w-full">
+        <img [src]="'qrcode.png'" alt="Qr code del progetto" class="w-128 h-128 object-cover">
+      </div>
+    </app-slide-free>
   `,
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent {
-  title = signal('Contacts');
 }

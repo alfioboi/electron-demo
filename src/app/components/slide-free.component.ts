@@ -3,7 +3,7 @@ import {BackwardIconComponent} from "./backward-icon.component";
 import {ForwardIconComponent} from "./forward-icon.component";
 
 @Component({
-  selector: 'app-slide-bio',
+  selector: 'app-slide-free',
   standalone: true,
   imports: [
     BackwardIconComponent,
@@ -13,42 +13,7 @@ import {ForwardIconComponent} from "./forward-icon.component";
     <div class="background-container">
       <img [src]="backgroundImagePath" alt="Background Image" class="background-image">
       <div class="overlay-container">
-        <div class="grid grid-cols-3 gap-4 p-4 pt-48 items-start">
-          <!-- FOTO + BIO (Stessa riga) -->
-          <div class="grid-cols-1 flex justify-center text-center">
-            @if (fotoPath) {
-              <!-- Wrapper circolare -->
-              <div
-                class="w-64 h-64 rounded-full border-4 border-gray-300 overflow-hidden flex items-center justify-center">
-                <!-- Foto dentro il cerchio -->
-                <img [src]="fotoPath"
-                     alt="Foto"
-                     class="w-full h-full object-cover"/>
-              </div>
-            }
-          </div>
-
-          <div class="grid-cols-2 col-span-2 w-full bio-slot">
-            <!-- bio slot -->
-            <ng-content select="[slot=bio]"/>
-          </div>
-
-          <!-- NOME -->
-          <div
-            class="grid-cols-1 row-start-2 font-semibold text-xl flex items-center justify-center text-center nome-slot">
-            <!-- nome slot -->
-            <div class="w-full">
-              <ng-content select="[slot=nome]"/>
-            </div>
-          </div>
-
-          <!-- QUALIFICA -->
-          <div
-            class="grid-cols-1 row-start-3 text-gray-500 italic flex items-center justify-center text-center qualifica-slot">
-            <!-- qualifica slot -->
-            <ng-content select="[slot=qualifica]"/>
-          </div>
-        </div>
+        <ng-content></ng-content>
         <div class="footer-content">
           <div>
             @if (hasBackward) {
@@ -109,20 +74,6 @@ import {ForwardIconComponent} from "./forward-icon.component";
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .bio-slot {
-      font-size: 2rem;
-    }
-
-    .nome-slot {
-      font-size: 2rem;
-      font-weight: bold;
-    }
-
-    .qualifica-slot {
-      font-size: 1.5rem;
-      color: gray;
-    }
-
     .footer-content {
       flex: 0 0 auto; /* Non contribuisce all'altezza totale */
       display: flex;
@@ -131,13 +82,11 @@ import {ForwardIconComponent} from "./forward-icon.component";
       align-items: start; /* Miglioramento dell'allineamento */
       margin-top: -2em; /* Sposta verso l'alto la sezione */
       width: 100%;
-    }
-  `,
+    }`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SlideBioComponent {
+export class SlideFreeComponent {
   backgroundImagePath = 'bio.svg';
-  @Input() fotoPath: string | undefined;
   @Input() hasBackward = false;
   @Input() hasForward = false;
   @Output() backWardClick: EventEmitter<void> = new EventEmitter<void>();
@@ -150,5 +99,6 @@ export class SlideBioComponent {
   handleForWardClic() {
     this.forWardClick.emit();
   }
+
 
 }
