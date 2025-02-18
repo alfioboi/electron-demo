@@ -23,12 +23,17 @@ import {ForwardIconComponent} from "./forward-icon.component";
                   <ng-content select="[slot=footer]"/>
                 </div>
                 <div class="footer-content">
-                  @if (hasBackward) {
-                    <app-backward-icon (backWardClick)="handleBackWardClic()"/>
-                  }
-                  @if (hasForward) {
-                    <app-forward-icon (forwardClick)="handleForWardClic()"/>
-                  }
+                  <div>
+                    @if (hasBackward) {
+                      <app-backward-icon (backWardClick)="handleBackWardClic()"/>
+                    }
+                  </div>
+                 <div>
+                   @if (hasForward) {
+                     <app-forward-icon (forwardClick)="handleForWardClic()"/>
+                   }
+                 </div>
+
                 </div>
               </div>
             </div>
@@ -111,7 +116,8 @@ import {ForwardIconComponent} from "./forward-icon.component";
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          align-items: center; /* Miglioramento dell'allineamento */
+          align-items: start; /* Miglioramento dell'allineamento */
+          margin-top: -2em; /* Sposta verso l'alto la sezione */
           width: 100%;
         }
 
@@ -120,8 +126,8 @@ import {ForwardIconComponent} from "./forward-icon.component";
     })
     export class SlideCoverComponent {
       backgroundImagePath = 'talk-background.png';
-      @Input() hasBackward = true;
-      @Input() hasForward = true;
+      @Input() hasBackward = false;
+      @Input() hasForward = false;
       @Output() backWardClick: EventEmitter<void> = new EventEmitter<void>();
       @Output() forWardClick: EventEmitter<void> = new EventEmitter<void>();
 
