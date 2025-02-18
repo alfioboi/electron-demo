@@ -42,9 +42,10 @@ import {ForwardIconComponent} from "./forward-icon.component";
           </div>
 
           <!-- QUALIFICA -->
-          <div class="grid-cols-1 row-start-3 text-gray-500 italic  flex items-center justify-center text-center qualifica-slot">
-          <!-- qualifica slot -->
-          <ng-content select="[slot=qualifica]"/>
+          <div class="grid-cols-1 row-start-3 text-gray-500 italic flex items-center justify-center text-center qualifica-slot">
+            <!-- qualifica slot -->
+            <ng-content select="[slot=qualifica]"/>
+          </div>
         </div>
       </div>
       <div class="footer-content">
