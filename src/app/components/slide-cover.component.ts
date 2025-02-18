@@ -10,33 +10,33 @@ import {ForwardIconComponent} from "./forward-icon.component";
         ForwardIconComponent
       ],
       template: `
-            <div class="background-container">
-              <img [src]="backgroundImagePath" alt="Background Image" class="background-image">
-              <div class="overlay-container">
-                <div class="header-slot">
-                  <ng-content select="[slot=header]"/>
-                </div>
-                <div class="content-slot">
-                  <ng-content select="[slot=content]"/>
-                </div>
-                <div class="footer-slot">
-                  <ng-content select="[slot=footer]"/>
-                </div>
-                <div class="footer-content">
-                  <div>
-                    @if (hasBackward) {
-                      <app-backward-icon (backWardClick)="handleBackWardClic()"/>
-                    }
-                  </div>
-                 <div>
-                   @if (hasForward) {
-                     <app-forward-icon (forwardClick)="handleForWardClic()"/>
-                   }
-                 </div>
-
-                </div>
-              </div>
+        <div class="background-container">
+          <img [src]="backgroundImagePath" alt="Background Image" class="background-image">
+          <div class="overlay-container">
+            <div class="header-slot">
+              <ng-content select="[slot=header]"/>
             </div>
+            <div class="content-slot">
+              <ng-content select="[slot=content]"/>
+            </div>
+            <div class="footer-slot">
+              <ng-content select="[slot=footer]"/>
+            </div>
+            <div class="footer-content">
+              <div>
+                @if (hasBackward) {
+                  <app-backward-icon (backWardClick)="handleBackWardClic()"/>
+                }
+              </div>
+              <div>
+                @if (hasForward) {
+                  <app-forward-icon (forwardClick)="handleForWardClic()"/>
+                }
+              </div>
+
+            </div>
+          </div>
+        </div>
       `,
       styles: `
         :host {
