@@ -125,7 +125,7 @@ import {ForwardIconComponent} from "./forward-icon.component";
       changeDetection: ChangeDetectionStrategy.OnPush
     })
     export class SlideCoverComponent {
-      backgroundImagePath = 'talk-background.png';
+      backgroundImagePath = 'cover.svg';
       @Input() hasBackward = false;
       @Input() hasForward = false;
       @Output() backWardClick: EventEmitter<void> = new EventEmitter<void>();
