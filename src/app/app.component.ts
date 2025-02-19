@@ -33,10 +33,12 @@ import {FooterComponent} from "./components/footer.component";
   `
 })
 export class AppComponent {
-  title = 'talk-electron-demo';
   constructor(private electronService: ElectronService, private router: Router) {
     this.electronService.on('salutaAngular', (message) => {
       console.log('message received: ', message);
+    });
+    this.electronService.on('debug', (message) => {
+      console.log('debug received: ', message);
     });
     this.electronService.on('navigate', (route: string) => {
       this.router.navigate([route]).then();

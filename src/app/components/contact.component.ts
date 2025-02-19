@@ -9,8 +9,8 @@ import {SlideFreeComponent} from "./slide-free.component";
   ],
   template: `
     <app-slide-free [hasBackward]="false" [hasForward]="false">
-      <div class="flex items-center justify-center h-full w-full">
-        <img [src]="'qrcode.png'" alt="Qr code del progetto" class="w-128 h-128 object-cover">
+      <div class="flex items-center justify-center h-full w-full mt-8">
+        <img [src]="'qrcode.png'" alt="Qr code del progetto" class="w-90 h-90 object-cover">
       </div>
     </app-slide-free>
   `,

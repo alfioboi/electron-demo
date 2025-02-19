@@ -3,6 +3,9 @@ const path = require('path');
 const { Worker } = require('worker_threads');
 
 let mainWindow;
+const publicPath =  __dirname.includes('app.asar')
+  ? path.join(__dirname, 'resources', 'public') :
+  path.join(__dirname, 'public');
 
 function createWindow() {
   const size = screen.getPrimaryDisplay().workAreaSize;
@@ -19,6 +22,7 @@ function createWindow() {
       allowRunningInsecureContent: serve,
       contextIsolation: true,
     },
+    icon: path.join(publicPath, 'engineering.ico')
   });
   if (serve) {
     const url = 'http://localhost:4200';

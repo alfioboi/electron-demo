@@ -1,10 +1,14 @@
 // db-worker.js
 const { parentPort } = require('worker_threads');
+const path = require("node:path");
 const sqlite3 = require('sqlite3').verbose();
-
-const db = new sqlite3.Database('expenses.db', (err) => {
+const dbPath =  __dirname.includes('app.asar')
+  ? path.join(__dirname, '../../public/expenses.db') :
+  path.join(__dirname, 'public', 'expenses.db');
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    parentPort.postMessage({ success: false, error: err.message });
+    parentPort.postMessage({ success: false, error: dbPath });
+    // parentPort.postMessage({ success: false, error: err.message });
   } else {
     db.run(`CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY, description TEXT, amount REAL, date TEXT)`);
   }
