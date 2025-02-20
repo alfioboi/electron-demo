@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, WritableSignal} from '@angular/core';
 import {SlideFreeComponent} from "./slide-free.component";
 import {PageService} from "../services/page.service";
+import {AccordionStateService} from "../services/accordion-state.service";
 
 @Component({
   selector: 'app-topics',
@@ -35,54 +36,66 @@ import {PageService} from "../services/page.service";
         </app-slide-free>
       }
       @case (2) {
-        <app-slide-free [hasBackward]="true" [hasForward]="true" (forWardClick)="page?.set(2)" (backWardClick)="page?.set(1)">
+        <app-slide-free [hasBackward]="true" [hasForward]="true" (forWardClick)="page?.set(2)"
+                        (backWardClick)="page?.set(1)">
           <div class="flex items-center justify-center h-full w-full mt-8 font-family: 'Segoe UI'">
-            <div class="text-center w-full"><h1 class="text-4xl font-bold">Installare Electron su un progetto Angular</h1></div>
+            <div class="text-center w-full">
+              <h1 class="text-4xl font-bold">Installare Electron su un progetto Angular</h1>
+            </div>
             <div class="text-2xl text-justify w-full">
               Per aggiungere Electron ad un progetto Angular è necessario seguire questi passaggi:
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="checkbox" class="accordion-checkbox" />
-                <div class="collapse-title text-xl font-medium">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 1)" (click)="avoidPropagation($event)" />
+                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 1)">
                   Installare la dipendenza Electron
                 </div>
                 <div class="collapse-content">
-                  <p>Tramite il comando <i>npm install electron --save-dev</i> dobbiamo installare la dipendenza, tra le devDependencies naturalmente, dal pacchetto Electron.</p>
+                  <p>Tramite il comando <i>npm install electron --save-dev</i> dobbiamo installare la dipendenza, tra le
+                    devDependencies naturalmente, dal pacchetto Electron.</p>
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="checkbox" class="accordion-checkbox" />
-                <div class="collapse-title text-xl font-medium">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 2)" (click)="avoidPropagation($event)" />
+                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 2)">
                   Installare la dipendenza del builder di Electron
                 </div>
                 <div class="collapse-content">
-                  <p>A cose fatte avremo bisogno di produrre degli artefatti per cui è necessario installare la dipendenza dal pacchetto che permette di effettuare la build di Electron tra le dipendenze di sviluppo tramite il comando <i>npm install electron --save-dev</i>.</p>
+                  <p>A cose fatte avremo bisogno di produrre degli artefatti per cui è necessario installare la
+                    dipendenza dal pacchetto che permette di effettuare la build di Electron tra le dipendenze di
+                    sviluppo tramite il comando <i>npm install electron --save-dev</i>.</p>
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="checkbox" class="accordion-checkbox" />
-                <div class="collapse-title text-xl font-medium">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 3)" (click)="avoidPropagation($event)" />
+                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 3)">
                   Modificare il file <i>package.json</i>
                 </div>
                 <div class="collapse-content">
-                  <p>A questo punto avremo necessità di modificare il nostro package.json per aggiungere le informazioni relative al progetto, indicare il punto di ingresso della parte node, aggiungere dei comandi personalizzati che permettando di eseguire le operazioni su Electron, aggiungere il blocco di build che fornisce al builder di Electron le informazioni necessarie per la creazione degli artefatti.</p>
+                  <p>A questo punto avremo necessità di modificare il nostro package.json per aggiungere le informazioni
+                    relative al progetto, indicare il punto di ingresso della parte node, aggiungere dei comandi
+                    personalizzati che permettando di eseguire le operazioni su Electron, aggiungere il blocco di build
+                    che fornisce al builder di Electron le informazioni necessarie per la creazione degli artefatti.</p>
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="checkbox" class="accordion-checkbox" />
-                <div class="collapse-title text-xl font-medium">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 4)" (click)="avoidPropagation($event)" />
+                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 4)">
                   Creare il file main.ts
                 </div>
                 <div class="collapse-content">
-                  <p>Avendo indicato il punto di ingresso della parte Node.js (solitamente chiamata main.ts) dovremo ovviamente crearla.</p>
+                  <p>Avendo indicato il punto di ingresso della parte Node.js (solitamente chiamata main.ts) dovremo
+                    ovviamente crearla.</p>
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="checkbox" class="accordion-checkbox" />
-                <div class="collapse-title text-xl font-medium">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 5)" (click)="avoidPropagation($event)" />
+                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 5)">
                   Creare le condizioni per far comunicare Angular con Node.js
                 </div>
                 <div class="collapse-content">
-                  <p>La parte frontend e quella backend comunicano attraverso un protocollo di messagistica chiamato IPCRender. Se vogliamo mantenere l'impostazione <i>contextIsolation</i> a <i>true</i> sarà necessario creare uno script che permetta ad Angular di accedere alle API di detto protocollo.</p>
+                  <p>La parte frontend e quella backend comunicano attraverso un protocollo di messagistica chiamato
+                    IPCRender. Se vogliamo mantenere l'impostazione <i>contextIsolation</i> a <i>true</i> sarà
+                    necessario creare uno script che permetta ad Angular di accedere alle API di detto protocollo.</p>
                 </div>
               </div>
             </div>
@@ -91,20 +104,50 @@ import {PageService} from "../services/page.service";
       }
     }
   `,
-  styles: `
-    .accordion-checkbox {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-  `,
+  styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopicsComponent {
   page: WritableSignal<number | undefined> | undefined = undefined;
+  topicsSlide2Number1: WritableSignal<number | undefined> | undefined = undefined;
 
-  constructor(private pageService: PageService) {
+  constructor(
+    private pageService: PageService,
+    private accordionStateService: AccordionStateService
+  ) {
     this.page = this.pageService.getPageSignal('TopicsComponent');
+    this.topicsSlide2Number1 = this.accordionStateService.getPageSignal('TopicsSlide2Number1');
   }
 
+  toggle(accordionName: string, index: number) {
+    const signal = this.getAccordionSignal(accordionName);
+    if (signal?.() !== index) {
+      signal?.set(index);
+    } else {
+      signal?.set(undefined);
+    }
+  }
+
+  private getAccordionSignal(accordionName: string): WritableSignal<number | undefined> | undefined {
+    switch (accordionName) {
+      case 'TopicsSlide2Number1':
+        return this.topicsSlide2Number1;
+    }
+    return undefined;
+  }
+
+    isAccordionOpen(accordionName: string, index: number) {
+      const signal: WritableSignal<number | undefined> | undefined = this.getAccordionSignal(accordionName);
+      return signal?.() === index;
+    }
+
+    isAccordionClosed(accordionName: string, index: number) {
+      const signal: WritableSignal<number | undefined> | undefined = this.getAccordionSignal(accordionName);
+      return signal?.() !== index;
+    }
+
+  avoidPropagation(event: MouseEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
 }

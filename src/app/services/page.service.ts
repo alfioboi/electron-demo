@@ -6,6 +6,7 @@ import {Injectable, signal, WritableSignal} from '@angular/core';
 export class PageService {
   private pageSignals = new Map<string, WritableSignal<number | undefined>>();
 
+
   constructor() { }
 
   getPageSignal(componentName: string) {
