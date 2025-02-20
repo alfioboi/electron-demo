@@ -82,7 +82,7 @@ import {PageService} from "../services/page.service";
                   Creare le condizioni per far comunicare Angular con Node.js
                 </div>
                 <div class="collapse-content">
-                  <p>la parte frontend e quella backend comunicano attraverso un protocollo di messagistica chiamato IPCRender. Se vogliamo mantenere l'impostazione <i>contextIsolation</i> a <i>true</i> sarà necessario creare uno script che permetta ad Angular di accedere alle API di detto protocollo.</p>
+                  <p>La parte frontend e quella backend comunicano attraverso un protocollo di messagistica chiamato IPCRender. Se vogliamo mantenere l'impostazione <i>contextIsolation</i> a <i>true</i> sarà necessario creare uno script che permetta ad Angular di accedere alle API di detto protocollo.</p>
                 </div>
               </div>
             </div>
