@@ -5,7 +5,19 @@
   "projects": {
     "talk-electron-demo": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineStyle": true,
+          "inlineTemplate": true,
+          "skipTests": true,
+          "flat": true,
+          "changeDetection": "OnPush"
+        },
+        "@schematics/angular:service": {
+          "flat": true,
+          "skipTests": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",

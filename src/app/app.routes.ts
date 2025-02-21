@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/expenses.component').then(m => m.ExpensesComponent)
   },
   {
+    path: 'multi-thread',
+    loadComponent: () => import('./components/multi-thread.component').then(m => m.MultiThreadComponent)
+  },
+  {
     path: 'about',
     loadComponent: () => import('./components/about.component').then(m => m.AboutComponent)
   },

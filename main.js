@@ -1,6 +1,7 @@
 const {app, BrowserWindow, screen, ipcMain, globalShortcut, Menu} = require('electron');
 const path = require('path');
 const {Worker} = require('worker_threads');
+const {readdirSync} = require("node:fs");
 
 let mainWindow;
 const publicPath = __dirname.includes('app.asar')
@@ -39,6 +40,7 @@ async function createWindow() {
         {label: 'About us', click: () => mainWindow.webContents.send('navigate', 'about')},
         {label: 'Topics', click: () => mainWindow.webContents.send('navigate', 'topics')},
         {label: 'Expenses', click: () => mainWindow.webContents.send('navigate', 'expenses')},
+        {label: 'Multi threads', click: () => mainWindow.webContents.send('navigate', 'multi-thread')},
         {label: 'Contacts', click: () => mainWindow.webContents.send('navigate', 'contacts')},
         {label: 'DevTools', click: () => mainWindow.webContents.openDevTools()},
         {label: 'Exit', click: () => app.quit()}
@@ -166,7 +168,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+    createWindow().then();
   }
 });
 
@@ -202,4 +204,21 @@ ipcMain.on('query-expenses', (event) => {
     event.reply('expenses-queried', result);
   });
   worker.postMessage({type: 'query'});
+});
+ipcMain.on('scegli-cartella-multi-thread', (event) => {
+  const {dialog} = require('electron');
+  dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory']
+  }).then((result) => {
+    if (!result.canceled) {
+      const cartella = result.filePaths[0];
+      event.reply('cartella-scelta-multi-thread', cartella);
+      let elencoFile = readdirSync(cartella, {
+          withFileTypes: true,
+        })
+        .filter((dirent) => dirent.isFile())
+        .map((dirent) => dirent.name);
+      event.reply('elenco-file-multi-thread', elencoFile);
+    }
+  });
 });
