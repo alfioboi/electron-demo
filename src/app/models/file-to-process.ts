@@ -2,7 +2,8 @@ import {ProcessStatus} from "../enums/process-status";
 
 export interface IFileToProcess {
   name: string;
+  path: string;
   size?: number;
-  avanzamento?: number;
+  progress?: number;
   status?: ProcessStatus
 }

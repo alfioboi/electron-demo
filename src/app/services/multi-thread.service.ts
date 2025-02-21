@@ -32,12 +32,13 @@ export class MultiThreadService {
 
   updateFile(updatedObject: IFileToProcess) {
     this.filesToProcess.set(this.filesToProcess().map(objSignal =>
-      objSignal().name === updatedObject.name ? signal(updatedObject) : objSignal
+      (objSignal().name === updatedObject.name && objSignal().path === updatedObject.path) ? signal(updatedObject) : objSignal
     ));
   }
   createFileList(files: string[]): void {
     const fileSignals = files.map(file => signal<IFileToProcess>({
       name: file,
+      path: this.cartella(),
       status: ProcessStatus.NotStarted
     }));
     this.filesToProcess.set(fileSignals);

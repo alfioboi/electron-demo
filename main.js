@@ -7,6 +7,7 @@ let mainWindow;
 const publicPath = __dirname.includes('app.asar')
   ? path.join(__dirname, 'resources', 'public') :
   path.join(__dirname, 'public');
+const runningFileThrads = new Map();
 
 async function createWindow() {
   const size = screen.getPrimaryDisplay().workAreaSize;
@@ -217,8 +218,30 @@ ipcMain.on('scegli-cartella-multi-thread', (event) => {
           withFileTypes: true,
         })
         .filter((dirent) => dirent.isFile())
+        .filter((dirent) => !dirent.name.endsWith('.gz'))
         .map((dirent) => dirent.name);
       event.reply('elenco-file-multi-thread', elencoFile);
     }
   });
+});
+ipcMain.on('start-process', (event, data) => {
+  const worker = new Worker(path.join(__dirname, 'file-worker.js'));
+  const key = path.join(data.path, data.name);
+  const payload = {
+    type: 'start',
+    fileToProcess: {
+      name: data.name,
+      path: data.path
+    }
+  };
+  worker.on('message', (data) => {
+    switch (data.type) {
+      case 'aggiornamenti':
+        event.reply('aggiornamenti-file', data.newFile);
+        break;
+    }
+    //event.reply('process-completed', result);
+  });
+  runningFileThrads.set(key, worker);
+  worker.postMessage({payload});
 });

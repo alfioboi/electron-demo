@@ -3,6 +3,7 @@ import {Router, RouterOutlet} from '@angular/router';
 import {ElectronService} from "./services/electron.service";
 import {HeaderComponent} from "./components/header.component";
 import {FooterComponent} from "./components/footer.component";
+import {MultiThreadService} from "./services/multi-thread.service";
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,7 @@ import {FooterComponent} from "./components/footer.component";
   `
 })
 export class AppComponent {
-  constructor(private electronService: ElectronService, private router: Router) {
+  constructor(private electronService: ElectronService, private router: Router, private multiThreadService: MultiThreadService) {
     this.electronService.on('salutaAngular', (message) => {
       console.log('message received: ', message);
     });
@@ -44,5 +45,8 @@ export class AppComponent {
       this.router.navigate([route]).then();
     })
     this.electronService.send('salutaNode', 'Hello from Angular');
+    this.electronService.on('aggiornamenti-file', (newFile) => {
+      this.multiThreadService.updateFile(newFile);
+    })
   }
 }
