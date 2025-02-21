@@ -12,14 +12,14 @@ import {PageService} from "../services/page.service";
   template: `
     @switch ((page?.())) {
       @case (1) {
-        <app-slide [hasBackward]="false" [hasForward]="true" (forWardClick)="page?.set(2)">
+        <app-slide [componentName]="componentName">
           <div slot="header">Electron</div>
           <div slot="content">Usare Javascript per creare applicazioni Desktop</div>
           <div slot="footer">Marzo 2025</div>
         </app-slide>
       }
       @case (2) {
-        <app-slide [hasBackward]="true" [hasForward]="false" (backWardClick)="page?.set(1)">
+        <app-slide [componentName]="componentName">
           <div slot="header">Di che cosa parleremo</div>
           <div slot="content">
             <ul role="list" class="space-y-4">
@@ -92,8 +92,11 @@ import {PageService} from "../services/page.service";
 })
 export class HomeComponent {
   page: WritableSignal<number | undefined> | undefined;
+  componentName = 'HomeComponent';
 
   constructor(private pageService: PageService) {
+    const noOfPagesSignal = this.pageService.getNoOfPagesSignal(this.componentName);
+    noOfPagesSignal.set(2);
     this.page = this.pageService.getPageSignal('HomeComponent');
   }
 }

@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {BackwardIconComponent} from "./backward-icon.component";
 import {ForwardIconComponent} from "./forward-icon.component";
+import {PageService} from "../services/page.service";
 
     @Component({
       selector: 'app-slide',
@@ -24,13 +25,13 @@ import {ForwardIconComponent} from "./forward-icon.component";
             </div>
             <div class="footer-content">
               <div>
-                @if (hasBackward) {
-                  <app-backward-icon (backWardClick)="handleBackWardClic()"/>
+                @if (hasBackward()) {
+                  <app-backward-icon (backWardClick)="goPreviousPage()"/>
                 }
               </div>
               <div>
-                @if (hasForward) {
-                  <app-forward-icon (forwardClick)="handleForWardClic()"/>
+                @if (hasForward()) {
+                  <app-forward-icon (forwardClick)="goNextPage()"/>
                 }
               </div>
 
@@ -125,17 +126,21 @@ import {ForwardIconComponent} from "./forward-icon.component";
       changeDetection: ChangeDetectionStrategy.OnPush
     })
     export class SlideCoverComponent {
+      @Input() componentName!: string;
       backgroundImagePath = 'cover.svg';
-      @Input() hasBackward = false;
-      @Input() hasForward = false;
-      @Output() backWardClick: EventEmitter<void> = new EventEmitter<void>();
-      @Output() forWardClick: EventEmitter<void> = new EventEmitter<void>();
 
-      handleBackWardClic() {
-        this.backWardClick.emit();
+      constructor(private pageService: PageService) {}
+
+      hasBackward() {
+        return this.pageService.hasBackward(this.componentName)();
       }
-
-      handleForWardClic() {
-        this.forWardClick.emit();
+      hasForward() {
+        return this.pageService.hasForward(this.componentName)();
+      }
+      goNextPage() {
+        this.pageService.goNextPage(this.componentName);
+      }
+      goPreviousPage() {
+        this.pageService.goToPreviousPage(this.componentName);
       }
     }
