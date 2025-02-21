@@ -145,11 +145,19 @@ import {AccordionStateService} from "../services/accordion-state.service";
             </div>
             <div class="text-2xl text-justify w-full">
               Abbiamo accennato al fatto che la parte back-end (Node.js) e la parte front-end (nel nostro caso Angular)
-              comunicano
-              attraverso un protocollo di comunicazione detto **IPC (Inter-Process Communication)**
-              . Per rendere disponibile ad Angular le API di
-              questo protocollo
-              si deve creare un un servizio (o importare un pacchetto tra alcuni che sono disponibili per Angular nel
+              comunicano attraverso un protocollo di comunicazione detto <b>IPC (Inter-Process Communication)</b>.<br>
+              Per farli comunicare, Electron fornisce il modulo <b>ipcMain</b> e il modulo <b>ipcRenderer</b>>, che usano un
+              sistema di eventi asincroni:
+              <ul>
+                <li>- Dal <b>Renderer Process</b>> al <b>Main Process</b>>: Si utilizza il modulo <b>ipcRenderer</b>> per
+                  inviare messaggi.
+                </li>
+                <li>
+                  - Dal <b>Main Process</b>> al <b>Renderer Process</b>>: Si utilizza il modulo <b>ipcMain</b>> per ascoltare i
+                  messaggi e rispondere.
+                </li>
+              </ul>
+              Per rendere disponibile ad Angular le API di del modulo <b>ipcRenderer</b> si deve creare un un servizio (o importare un pacchetto tra alcuni che sono disponibili per Angular nel
               repository Npm).<br>
               L'accesso di Angular a questo protocollo, qualora si imposti nelle impostazioni delle finestre di Windows
               messe a disposizione di Node.js
