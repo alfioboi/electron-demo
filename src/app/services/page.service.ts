@@ -35,9 +35,6 @@ export class PageService {
   hasForward(componentName: string) {
     const pageSignal = this.getPageSignal(componentName);
     const noOfPagesSignal = this.getNoOfPagesSignal(componentName);
-    console.log(noOfPagesSignal(), 'pagine totali');
-    console.log(pageSignal(), 'pagina corrente');
-    console.log((pageSignal() || 1) < noOfPagesSignal(), 'pagina corrente < numero pagine totali');
     return computed(() => (pageSignal() || 1) < noOfPagesSignal());
   }
 

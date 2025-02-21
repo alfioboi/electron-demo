@@ -138,34 +138,23 @@ export class ExpensesComponent implements OnInit {
   ngOnInit(): void {
     this.electronService.on('expense-inserted', (result) => {
       if (result.success) {
-        console.log('Expense inserted with ID:', result.id);
         this.queryExpenses();
-      } else {
-        console.error('Error inserting expense:', result.error);
       }
     });
     this.electronService.on('expense-updated', (result) => {
       if (result.success) {
-        console.log('Expense updated with ID:', result.id);
         this.queryExpenses();
-      } else {
-        console.error('Error inserting expense:', result.error);
       }
     });
     this.electronService.on('expense-deleted', (result) => {
       if (result.success) {
-        console.log('Expense deleted');
         this.queryExpenses();
-      } else {
-        console.error('Error deleting expense:', result.error);
       }
     });
 
     this.electronService.on('expenses-queried', (result) => {
       if (result.success) {
         this.expenses.set(result.data);
-      } else {
-        console.error('Error querying expenses:', result.error);
       }
     });
 
