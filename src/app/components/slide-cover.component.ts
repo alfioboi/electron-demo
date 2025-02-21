@@ -64,7 +64,7 @@ import {ForwardIconComponent} from "./forward-icon.component";
         .background-image {
           width: 100%;
           height: 100%;
-          object-fit: contain; /* Scala proporzionalmente l'immagine senza deformarla */
+          object-fit: cover; /* Scala proporzionalmente l'immagine senza deformarla */
           pointer-events: none; /* Impedisce interazione con l'immagine */
           transform: scale(1); /* Assicura che l'immagine erediti esattamente lo stesso comportamento di scala */
           transition: transform 0.2s ease-in-out; /* Transizione fluida per modifiche dinamiche */
