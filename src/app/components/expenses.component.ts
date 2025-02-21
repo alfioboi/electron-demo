@@ -32,8 +32,8 @@ import {NgClass} from "@angular/common";
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>{{idActiveExpense() ?? ''}}</td>
+            <tr class="highlight-row">
+              <td>{{ idActiveExpense() ?? '' }}</td>
               <td><textarea formControlName="description" class="textarea textarea-bordered"
                             placeholder="Type description here"></textarea></td>
               <td><input type="number" formControlName="amount" placeholder="Type amount here"
@@ -42,18 +42,20 @@ import {NgClass} from "@angular/common";
               </td>
               <td>
                 @if (!idActiveExpense()) {
-                <button class="btn" type="submit" [disabled]="!expenseForm.valid">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                       stroke="currentColor" class="size-[1.2em]">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                  </svg>
-                  Add expense
-                </button>
+                  <button class="btn" type="submit" [disabled]="!expenseForm.valid">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-[1.2em]">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    Add expense
+                  </button>
                 } @else {
                   <button class="btn" type="submit" [disabled]="!expenseForm.valid">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-1.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/>
                     </svg>
                     Update expense
                   </button>
@@ -67,13 +69,14 @@ import {NgClass} from "@angular/common";
                   <td>{{ expense.amount }}</td>
                   <td>{{ expense.date }}</td>
                   <td>
-                    <button class="btn mr-2" type="button" (click)="idActiveExpense() === expense.id ? activeExpense.set(null) : activeExpense.set(expense)">
+                    <button class="btn mr-2" type="button"
+                            (click)="idActiveExpense() === expense.id ? activeExpense.set(null) : activeExpense.set(expense)">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" class="size-[1.2em]">
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                       </svg>
-                      {{idActiveExpense() === expense.id ? 'Cancel edit' : 'Edit expense'}}
+                      {{ idActiveExpense() === expense.id ? 'Cancel edit' : 'Edit expense' }}
                     </button>
                     <button class="btn" type="button" (click)="deleteExpense(expense.id)">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -91,7 +94,13 @@ import {NgClass} from "@angular/common";
       </div>
     </form>
   `,
-  styles: ``,
+  styles: `
+    .highlight-row {
+      background-color: rgba(0, 123, 255, 0.2); /* Colore di sfondo leggermente distinto */
+      border-left: 5px solid #007bff; /* Bordo a sinistra per indicare un focus */
+      transition: background-color 0.3s ease, border-color 0.3s ease; /* Transizione fluida */
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpensesComponent implements OnInit {
