@@ -12,7 +12,7 @@ import {AccordionStateService} from "../services/accordion-state.service";
   template: `
     @switch ((page?.())) {
       @case (1) {
-        <app-slide-free [hasBackward]="false" [hasForward]="true" (forWardClick)="page?.set(2)">
+        <app-slide-free [componentName]="componentName">
           <div class="flex items-center justify-center h-full w-full mt-8 font-family: 'Segoe UI'">
             <div class="text-center w-full"><h1 class="text-4xl font-bold">Cosa è Electron e a cosa serve?</h1></div>
             <div class="text-2xl text-justify w-full">
@@ -36,8 +36,7 @@ import {AccordionStateService} from "../services/accordion-state.service";
         </app-slide-free>
       }
       @case (2) {
-        <app-slide-free [hasBackward]="true" [hasForward]="true" (forWardClick)="page?.set(2)"
-                        (backWardClick)="page?.set(1)">
+        <app-slide-free [componentName]="componentName">
           <div class="flex items-center justify-center h-full w-full mt-8 font-family: 'Segoe UI'">
             <div class="text-center w-full">
               <h1 class="text-4xl font-bold">Installare Electron su un progetto Angular</h1>
@@ -45,8 +44,9 @@ import {AccordionStateService} from "../services/accordion-state.service";
             <div class="text-2xl text-justify w-full">
               Per aggiungere Electron ad un progetto Angular è necessario seguire questi passaggi:
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 1)" (click)="avoidPropagation($event)" />
-                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 1)">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 1)"
+                       (click)="avoidPropagation($event)"/>
+                <div class="collapse-title text-xl font-medium" (click)="toggleAccordionItem('TopicsSlide2Number1', 1)">
                   Installare la dipendenza Electron
                 </div>
                 <div class="collapse-content">
@@ -55,8 +55,9 @@ import {AccordionStateService} from "../services/accordion-state.service";
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 2)" (click)="avoidPropagation($event)" />
-                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 2)">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 2)"
+                       (click)="avoidPropagation($event)"/>
+                <div class="collapse-title text-xl font-medium" (click)="toggleAccordionItem('TopicsSlide2Number1', 2)">
                   Installare la dipendenza del builder di Electron
                 </div>
                 <div class="collapse-content">
@@ -66,8 +67,9 @@ import {AccordionStateService} from "../services/accordion-state.service";
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 3)" (click)="avoidPropagation($event)" />
-                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 3)">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 3)"
+                       (click)="avoidPropagation($event)"/>
+                <div class="collapse-title text-xl font-medium" (click)="toggleAccordionItem('TopicsSlide2Number1', 3)">
                   Modificare il file <i>package.json</i>
                 </div>
                 <div class="collapse-content">
@@ -78,8 +80,9 @@ import {AccordionStateService} from "../services/accordion-state.service";
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 4)" (click)="avoidPropagation($event)" />
-                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 4)">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 4)"
+                       (click)="avoidPropagation($event)"/>
+                <div class="collapse-title text-xl font-medium" (click)="toggleAccordionItem('TopicsSlide2Number1', 4)">
                   Creare il file main.ts
                 </div>
                 <div class="collapse-content">
@@ -88,8 +91,9 @@ import {AccordionStateService} from "../services/accordion-state.service";
                 </div>
               </div>
               <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mt-4 mb-4">
-                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 5)" (click)="avoidPropagation($event)" />
-                <div class="collapse-title text-xl font-medium" (click)="toggle('TopicsSlide2Number1', 5)">
+                <input type="radio" name="my-accordion-4" [checked]="isAccordionOpen('TopicsSlide2Number1', 5)"
+                       (click)="avoidPropagation($event)"/>
+                <div class="collapse-title text-xl font-medium" (click)="toggleAccordionItem('TopicsSlide2Number1', 5)">
                   Creare le condizioni per far comunicare Angular con Node.js
                 </div>
                 <div class="collapse-content">
@@ -102,6 +106,59 @@ import {AccordionStateService} from "../services/accordion-state.service";
           </div>
         </app-slide-free>
       }
+      @case (3) {
+        <app-slide-free [componentName]="componentName">
+          <div class="flex items-center justify-center h-full w-full mt-8 font-family: 'Segoe UI'">
+            <div class="text-center w-full"><h1 class="text-4xl font-bold">Cosa effettuare il debug di un'applicazione
+              Electron?</h1></div>
+            <div class="text-2xl text-justify w-full">
+              In fase di sviluppo si può effettuare il debug di un'applicazione Electron separando i comandi che servono
+              per avviare la parte front-end e quella di backend.
+              Per quanto riguarda il nostro progetto, essendo basato su Angular, per l'avvio della parte front-end si
+              utilizzerà il solito comando <i>ng start</i>. Così facendo,
+              se ci si fermasse a questo, sarebbe sempre possibile aprire un qualsiasi browser, e visualizzare il
+              contenuto
+              dell'applicazione attraverso l'url http://localhost:4200 (sempre che non si
+              sia provveduto ad indicare un'altra porta) perché in effetti la parte Angular fa il suo mestiere.<br>Quello
+              che otterremmo però sarebbe una versione depotenziata dell'applicativo. Infatti tutte le funzionalità
+              legate alla comunicazione
+              con Node.js non sarebbero disponibili in questa sede.<br>
+              Per avviare la parte Node.js a questo punto si dovrebbe usare un camando del tipo <i>wait-on tcp:4200 &&
+              electron . --serve --inspect-brk=9229</i>,
+              dopo aver installato tra le devDependencies il pacchetto <i>wait-on</i>, che serve per aspettare che
+              Angular sia pronto sulla porta 4200 (o un'altra a scelta)
+              per lanciare il processo Node.js a cui passeremo il parametro <i>--serve</i> e indicheremo con il
+              parametro <i>--inspect-brk=9229</i> che è possibile ispezionare
+              il codice node sulla porta 9229, utilizzando anche i breakpoint utilizzando un ispector.
+              A questo punto, una volta lanciato il processo di ispezione, la cui modalità cambia da IDE a IDE, verrà
+              aperta la finestra in cui verrà caricato il contenuto di http://localohst:4200,
+              sarà possibile effettuare il debug attraverso la console di Chromium utilizzato da Electron della parte
+              front-end, mentre il debug di Node.js avverrà attraverso l'inspector.
+            </div>
+          </div>
+        </app-slide-free>
+      }
+      @case (4) {
+        <app-slide-free [componentName]="componentName">
+          <div class="flex items-center justify-center h-full w-full mt-8 font-family: 'Segoe UI'">
+            <div class="text-center w-full"><h1 class="text-4xl font-bold">Come comunicano front-end e back-end</h1>
+            </div>
+            <div class="text-2xl text-justify w-full">
+              Abbiamo accennato al fatto che la parte back-end (Node.js) e la parte front-end (nel nostro caso Angular)
+              comunicano
+              attraverso un protocollo di comunicazione detto IPCRender. Per rendere disponibile ad Angular le API di
+              questo protocollo
+              si deve creare un un servizio (o importare un pacchetto tra alcuni che sono disponibili per Angular nel
+              repository Npm).<br>
+              L'accesso di Angular a questo protocollo, qualora si imposti nelle impostazioni delle finestre di Windows
+              messe a disposizione di Node.js
+              l'impostazione <i>contextIsolation</i> a true attraverso uno script che dobbiamo caricare prima ancora che
+              venga creata la finestra attraverso
+              l'impostazione del path a tale script in <i>preload</i> tra i settaggi della finestra stessa.<br>
+            </div>
+          </div>
+        </app-slide-free>
+      }
     }
   `,
   styles: ``,
@@ -110,16 +167,19 @@ import {AccordionStateService} from "../services/accordion-state.service";
 export class TopicsComponent {
   page: WritableSignal<number | undefined> | undefined = undefined;
   topicsSlide2Number1: WritableSignal<number | undefined> | undefined = undefined;
+  componentName = 'TopicsComponent';
 
   constructor(
     private pageService: PageService,
     private accordionStateService: AccordionStateService
   ) {
-    this.page = this.pageService.getPageSignal('TopicsComponent');
-    this.topicsSlide2Number1 = this.accordionStateService.getPageSignal('TopicsSlide2Number1');
+    const noOfPagesSignal = this.pageService.getNoOfPagesSignal(this.componentName);
+    noOfPagesSignal.set(4);
+    this.topicsSlide2Number1 = this.accordionStateService.getAccordionStateSignal('TopicsSlide2Number1');
+    this.page = this.pageService.getPageSignal(this.componentName);
   }
 
-  toggle(accordionName: string, index: number) {
+  toggleAccordionItem(accordionName: string, index: number) {
     const signal = this.getAccordionSignal(accordionName);
     if (signal?.() !== index) {
       signal?.set(index);
@@ -136,15 +196,10 @@ export class TopicsComponent {
     return undefined;
   }
 
-    isAccordionOpen(accordionName: string, index: number) {
-      const signal: WritableSignal<number | undefined> | undefined = this.getAccordionSignal(accordionName);
-      return signal?.() === index;
-    }
-
-    isAccordionClosed(accordionName: string, index: number) {
-      const signal: WritableSignal<number | undefined> | undefined = this.getAccordionSignal(accordionName);
-      return signal?.() !== index;
-    }
+  isAccordionOpen(accordionName: string, index: number) {
+    const signal: WritableSignal<number | undefined> | undefined = this.getAccordionSignal(accordionName);
+    return signal?.() === index;
+  }
 
   avoidPropagation(event: MouseEvent) {
     event.stopPropagation();

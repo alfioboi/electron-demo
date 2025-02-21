@@ -8,7 +8,7 @@ import {SlideFreeComponent} from "./slide-free.component";
     SlideFreeComponent
   ],
   template: `
-    <app-slide-free [hasBackward]="false" [hasForward]="false">
+    <app-slide-free [componentName]="componentName">
       <div class="flex items-center justify-center h-full w-full mt-8">
         <img [src]="'qrcode.png'" alt="Qr code del progetto" class="w-90 h-90 object-cover">
       </div>
@@ -18,4 +18,5 @@ import {SlideFreeComponent} from "./slide-free.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent {
+  componentName = 'ContactComponent';
 }

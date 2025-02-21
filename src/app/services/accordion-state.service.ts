@@ -8,7 +8,7 @@ export class AccordionStateService {
 
   constructor() { }
 
-  getPageSignal(accordionName: string) {
+  getAccordionStateSignal(accordionName: string) {
     if (!this.accordionSignals.has(accordionName)) {
       this.accordionSignals.set(accordionName, signal<number>(0));
     }
