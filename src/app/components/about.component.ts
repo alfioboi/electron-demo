@@ -8,7 +8,7 @@ import {SlideBioComponent} from "./slide-bio.component";
     SlideBioComponent
   ],
   template: `
-    <app-slide-bio [hasForward]="false" [hasBackward]="false" [fotoPath]="'foto-alfio-boi.jpg'">
+    <app-slide-bio [componentName]="componentName" [fotoPath]="'foto-alfio-boi.jpg'">
       <div slot="bio"></div>
       <div slot="nome">Alfio Boi</div>
       <div slot="qualifica">
@@ -27,4 +27,5 @@ import {SlideBioComponent} from "./slide-bio.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutComponent {
+  componentName = 'AboutComponent';
 }
