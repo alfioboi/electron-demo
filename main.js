@@ -37,6 +37,7 @@ function createWindow() {
       submenu: [
         { label: 'Home', click: () => mainWindow.webContents.send('navigate', 'home') },
         { label: 'About us', click: () => mainWindow.webContents.send('navigate', 'about') },
+        { label: 'Topics', click: () => mainWindow.webContents.send('navigate', 'topics') },
         { label: 'Expenses', click: () => mainWindow.webContents.send('navigate', 'expenses') },
         { label: 'Contacts', click: () => mainWindow.webContents.send('navigate', 'contacts') },
         { label: 'DevTools', click: () => mainWindow.webContents.openDevTools() },
