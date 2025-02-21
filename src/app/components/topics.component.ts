@@ -98,7 +98,7 @@ import {AccordionStateService} from "../services/accordion-state.service";
                 </div>
                 <div class="collapse-content">
                   <p>La parte frontend e quella backend comunicano attraverso un protocollo di messagistica chiamato
-                    IPCRender. Se vogliamo mantenere l'impostazione <i>contextIsolation</i> a <i>true</i> sarà
+                    **IPC (Inter-Process Communication)**. Se vogliamo mantenere l'impostazione <i>contextIsolation</i> a <i>true</i> sarà
                     necessario creare uno script che permetta ad Angular di accedere alle API di detto protocollo.</p>
                 </div>
               </div>
@@ -146,7 +146,8 @@ import {AccordionStateService} from "../services/accordion-state.service";
             <div class="text-2xl text-justify w-full">
               Abbiamo accennato al fatto che la parte back-end (Node.js) e la parte front-end (nel nostro caso Angular)
               comunicano
-              attraverso un protocollo di comunicazione detto IPCRender. Per rendere disponibile ad Angular le API di
+              attraverso un protocollo di comunicazione detto **IPC (Inter-Process Communication)**
+              . Per rendere disponibile ad Angular le API di
               questo protocollo
               si deve creare un un servizio (o importare un pacchetto tra alcuni che sono disponibili per Angular nel
               repository Npm).<br>
