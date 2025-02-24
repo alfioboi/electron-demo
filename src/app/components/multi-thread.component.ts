@@ -42,7 +42,7 @@ import {FileSizePipe} from "../pipes/file-size";
                   <div class="card-actions justify-end">
                     @if (file().status !== ProcessStatus.Completed) {
                       <button class="btn btn-primary"
-                              (click)="handleFileButtons(file())">{{ file().status === ProcessStatus.InProgress ? 'Stop' : file().status === ProcessStatus.NotStarted ? 'Start' : (file().status === ProcessStatus.Canceled || file().status === ProcessStatus.Failed) ? 'Retry' : '' }}
+                              (click)="processFile(file())">{{ file().status === ProcessStatus.InProgress ? 'Stop' : file().status === ProcessStatus.NotStarted ? 'Start' : (file().status === ProcessStatus.Canceled || file().status === ProcessStatus.Failed) ? 'Retry' : '' }}
                       </button>
                     }
                   </div>
@@ -91,21 +91,18 @@ export class MultiThreadComponent {
   }
 
   protected readonly ProcessStatus = ProcessStatus;
-
-  handleFileButtons(iFileToProcess: IFileToProcess) {
-    switch (iFileToProcess.status) {
-      case ProcessStatus.NotStarted:
-        this.electronService.send('start-process', {path: this.multiThreadService.cartella(), name: iFileToProcess.name});
-        break;
-    }
-  }
-
   runAll() {
     this.multiThreadService.files.forEach(fileSignal => {
       const file = fileSignal();
-      if (file.status === ProcessStatus.NotStarted || file.status === ProcessStatus.Canceled || file.status === ProcessStatus.Failed) {
-        this.electronService.send('start-process', {path: this.multiThreadService.cartella(), name: file.name});
-      }
+      this.processFile(file);
     });
+  }
+
+  public processFile(file: IFileToProcess) {
+    if (file.status === ProcessStatus.NotStarted || file.status === ProcessStatus.Canceled || file.status === ProcessStatus.Failed) {
+      this.electronService.send('start-process', {path: this.multiThreadService.cartella(), name: file.name});
+    } else if (file.status === ProcessStatus.InProgress) {
+      this.electronService.send('stop-process', {path: this.multiThreadService.cartella(), name: file.name});
+    }
   }
 }

@@ -245,3 +245,16 @@ ipcMain.on('start-process', (event, data) => {
   runningFileThrads.set(key, worker);
   worker.postMessage({payload});
 });
+ipcMain.on('stop-process', (event, data) => {
+  const key = path.join(data.path, data.name);
+  if (runningFileThrads.size && runningFileThrads.has(key)) {
+    const worker = runningFileThrads.get(key);
+    worker.terminate();
+    runningFileThrads.delete(key);
+    const newFile = {
+      ...data,
+      status: 'Canceled'
+    }
+    event.reply('aggiornamenti-file', newFile);
+  }
+});
