@@ -1,6 +1,6 @@
 {
   "name": "talk-electron-demo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Un client avanzato per ADI, con supporto per Electron e Angular.",
   "author": "Engineering Informatica S.p.a.",
   "main": "main.js",
@@ -33,6 +33,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "daisyui": "^4.12.23",
     "express": "^4.21.2",
+    "readline-sync": "^1.4.10",
     "rxjs": "~7.8.0",
     "sqlite3": "^5.1.7",
     "tslib": "^2.3.0",
