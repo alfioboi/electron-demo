@@ -168,6 +168,13 @@ import {AccordionStateService} from "../services/accordion-state.service";
           </div>
         </app-slide-free>
       }
+      @case(5) {
+        <app-slide-free [componentName]="componentName">
+          <div class="flex items-center justify-center h-full w-full mt-8 font-family: 'Segoe UI'">
+            <div class="text-center w-full"><h1 class="text-8xl font-bold">Q & A</h1></div>
+          </div>
+        </app-slide-free>
+      }
     }
   `,
   styles: ``,
@@ -183,7 +190,7 @@ export class TopicsComponent {
     private accordionStateService: AccordionStateService
   ) {
     const noOfPagesSignal = this.pageService.getNoOfPagesSignal(this.componentName);
-    noOfPagesSignal.set(4);
+    noOfPagesSignal.set(5);
     this.topicsSlide2Number1 = this.accordionStateService.getAccordionStateSignal('TopicsSlide2Number1');
     this.page = this.pageService.getPageSignal(this.componentName);
   }

@@ -1,4 +1,4 @@
-import { computed, Injectable, signal, WritableSignal } from '@angular/core';
+import {computed, Injectable, Signal, signal, WritableSignal} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,12 @@ export class PageService {
       this.noOfPagesSignals.set(componentName, signal<number>(1)); // Default: 1 pagina disponibile
     }
     return this.noOfPagesSignals.get(componentName)!;
+  }
+  getPageLabelSignal(componentName: string): Signal<string> {
+    if (this.getPageSignal(componentName)() && this.getNoOfPagesSignal(componentName)() > 1) {
+      return signal(`${this.getPageSignal(componentName)() || 1} / ${this.getNoOfPagesSignal(componentName)()}`);
+    }
+    return signal('');
   }
 
   // Computed Signal: c'è una pagina precedente?

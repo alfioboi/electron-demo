@@ -63,8 +63,7 @@ import {PageService} from "../services/page.service";
               <li class="flex items-center gap-2 bg-white/80 shadow-md p-4 rounded-lg">
                 <span class="h-3 w-3 inline-block bg-teal-500 rounded-full"></span>
                 <p class="text-gray-700 text-base font-medium">
-                  Secondo caso d'uso: come eseguire le operazioni in parallelo liberando il main thread. Video Player
-                  multipli.
+                  Secondo caso d'uso: come eseguire le operazioni in parallelo liberando il main thread. Esecuzione parallela di operzioni input/output.
                 </p>
               </li>
               <li class="flex items-center gap-2 bg-white/80 shadow-md p-4 rounded-lg">

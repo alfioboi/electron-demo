@@ -1,14 +1,11 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {BackwardIconComponent} from "./backward-icon.component";
-import {ForwardIconComponent} from "./forward-icon.component";
-import {PageService} from "../services/page.service";
+import {FooterOfSlideComponent} from "./footer-of-slide.component";
 
     @Component({
       selector: 'app-slide',
       standalone: true,
       imports: [
-        BackwardIconComponent,
-        ForwardIconComponent
+        FooterOfSlideComponent
       ],
       template: `
         <div class="background-container">
@@ -23,19 +20,7 @@ import {PageService} from "../services/page.service";
             <div class="footer-slot">
               <ng-content select="[slot=footer]"/>
             </div>
-            <div class="footer-content">
-              <div>
-                @if (hasBackward()) {
-                  <app-backward-icon (backWardClick)="goPreviousPage()"/>
-                }
-              </div>
-              <div>
-                @if (hasForward()) {
-                  <app-forward-icon (forwardClick)="goNextPage()"/>
-                }
-              </div>
-
-            </div>
+            <app-footer-of-slide [componentName]="componentName"/>
           </div>
         </div>
       `,
@@ -111,36 +96,10 @@ import {PageService} from "../services/page.service";
           align-items: flex-start;
           padding-left: 5%;
         }
-
-        .footer-content {
-          flex: 0 0 auto; /* Non contribuisce all'altezza totale */
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: start; /* Miglioramento dell'allineamento */
-          margin-top: -2em; /* Sposta verso l'alto la sezione */
-          width: 100%;
-        }
-
       `,
       changeDetection: ChangeDetectionStrategy.OnPush
     })
     export class SlideCoverComponent {
       @Input() componentName!: string;
       backgroundImagePath = 'cover.svg';
-
-      constructor(private pageService: PageService) {}
-
-      hasBackward() {
-        return this.pageService.hasBackward(this.componentName)();
-      }
-      hasForward() {
-        return this.pageService.hasForward(this.componentName)();
-      }
-      goNextPage() {
-        this.pageService.goNextPage(this.componentName);
-      }
-      goPreviousPage() {
-        this.pageService.goToPreviousPage(this.componentName);
-      }
     }
